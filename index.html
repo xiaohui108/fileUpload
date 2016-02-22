@@ -12,14 +12,23 @@
     </style>
     </head>
     <body>
-       <input type="file" accept="image/*,audio/*" id="upload"/>
-       <script type="text/javascript">
+        <div id="uploadContainer">
+            <input type="file" accept="image/*,audio/*" id="upload"/>
+        </div>
+        <script type="text/javascript">
             var upload = document.getElementById('upload');
-            upload.addEventListener('change',function(){
+            upload.addEventListener('change',function(evt){
+                var upload = document.getElementById('upload');
                 var file = upload.files[0];
-                //console.log(file.name)
-                //console.log(file.type)
-                //console.log(file.size)
+                var clone = upload.cloneNode(true);
+                clone.onchange = arguments.callee; //克隆不会复制动态绑定事件
+                clone.value = '';
+                upload.parentNode.replaceChild(clone, upload)
+                //document.getElementById('uploadContainer').removeChild(upload);
+                //document.getElementById('uploadContainer').appendChild(clone);
+                console.log(file.name)
+                console.log(file.type)
+                console.log(file.size)
             },false)
        </script>
     </body>
