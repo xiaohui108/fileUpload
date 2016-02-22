@@ -10,3 +10,5 @@ image/* 图片类型
 video/* 视频类型
 
 audio/* 音频类型
+
+上传相同文件时不会触发upload的change事件，所以必须cloneNode upload dom,然后change事件需要重新绑定
